@@ -1,11 +1,11 @@
 import client from '../database';
 import { Product } from './types/product';
 
-export class Store {
-    async index_products(): Promise<Product[]> {
+export class Products {
+    async index(): Promise<Product[]> {
         try {
+            const sql = 'select * from products;';
             const connection = await client.connect();
-            const sql = 'select * from products';
             const result = await connection.query(sql);
             connection.release();
             return result.rows;
@@ -14,10 +14,10 @@ export class Store {
         }
     }
 
-    async show_product(id: string): Promise<Product> {
+    async show(id: string): Promise<Product> {
         try {
+            const sql = 'select * from products where id=$1;';
             const connection = await client.connect();
-            const sql = 'select * from products where id=($1)';
             const result = await connection.query(sql, [id]);
             connection.release();
             return result.rows[0];
@@ -26,13 +26,12 @@ export class Store {
         }
     }
 
-    async create_product(product: Product): Promise<Product> {
+    async create(product: Product): Promise<Product> {
         try {
-            const connection = await client.connect();
             const sql =
-                'insert into products(id, name, price) values($1, $2, $3) returning *';
+                'insert into products(name, price) values($1, $2) returning *;';
+            const connection = await client.connect();
             const result = await connection.query(sql, [
-                product.id,
                 product.name,
                 product.price
             ]);
@@ -40,18 +39,6 @@ export class Store {
             return result.rows[0];
         } catch (err) {
             throw new Error(`Cannot add product ${product.id}. Error: ${err}`);
-        }
-    }
-
-    async delete_product(id: string): Promise<Product> {
-        try {
-            const connection = await client.connect();
-            const sql = 'delete from products where id=($1)';
-            const result = await connection.query(sql, [id]);
-            connection.release();
-            return result.rows[0];
-        } catch (err) {
-            throw new Error(`Cannot delete product ${id}. Error: ${err}`);
         }
     }
 }
