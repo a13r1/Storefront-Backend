@@ -1,4 +1,4 @@
-import client from '../database';
+import { client } from '../database';
 import { Product } from './types/product';
 
 export class Products {

@@ -13,8 +13,8 @@ create table users (
 
 create table orders (
     id serial primary key,
-    products_ids int [] not null,
-    products_quantities int [] not null,
+    product_id int not null,
+    quantity int not null,
     user_id int not null,
     status varchar(8) not null,
     foreign key(product_id) references products(id),
