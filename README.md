@@ -46,6 +46,7 @@ TOKEN_SECRET=token123
 ENV=production  
 ```
 ### 5. Modify `database.json` to contain your psql username and password
+### 6. Backend runs on port: 3000, Database runs on port: 5432
 
 
 ## How to run
