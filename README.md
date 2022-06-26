@@ -30,7 +30,7 @@ This application uses the following libraries:
 - "node": "^12.22.12",
 - "pg": "^8.5.1"
 
-**Note**: I have faced a lot of comptability issues between Node and Postgres. So I recommend using the very specific packages versions mentioned above, otherwise the application is not guaranteed to work.
+**Note**: I have faced a lot of compatibility issues between Node and Postgres. So I recommend using the very specific packages versions mentioned above, otherwise the application is not guaranteed to work.
 ### 3. Create psql production database called *store* and another one for testing called *store_test*
 ### 4. Add `.env` file that should look like the following:
 ```
