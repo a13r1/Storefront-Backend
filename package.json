@@ -6,11 +6,10 @@
   "scripts": {
     "lint": "eslint src/**/*.ts --fix",
     "prettier": "prettier --config .prettierrc src/**/*.ts --write",
-    "tsc": "tsc",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "lintier": "npm run lint && npm run prettier",
-    "test": "db-migrate up && jasmine-ts && db-migrate down",
-    "start": "db-migrate down && db-migrate up && tsc && node dist/server.js"
+    "test": "tsc && cross-env ENV=test db-migrate --env test down && cross-env ENV=test db-migrate --env test up && cross-env ENV=test jasmine && cross-env ENV=test db-migrate --env test down",
+    "start": "tsc && db-migrate --env production up && node dist/server.js"
   },
   "author": "Ali Rihan",
   "license": "ISC",
@@ -39,6 +38,7 @@
     "@types/tsc-watch": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
+    "cross-env": "^6.0.3",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -48,7 +48,6 @@
     "eslint-plugin-promise": "^6.0.0",
     "jasmine": "^4.2.1",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.4.0",
     "prettier": "^2.7.1",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9",
