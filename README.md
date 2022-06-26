@@ -11,6 +11,7 @@ This application uses the following libraries:
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
 - db-migrate from npm for migrations
+- bcrypt from npm for encrypting users passwords
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
@@ -69,6 +70,8 @@ provide new user information as a JSON object in the *body*
 this will return a jwt that you can use for authorization  
 
 ![jwt in postman](postman/create_user_jwt.png)  
+
+**Note**: you can visit [jwt.io](https://jwt.io/#debugger-io) to verify the jwt  
 
 ### 2. index all users
 This requires authorization  
