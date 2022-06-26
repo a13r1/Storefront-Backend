@@ -10,7 +10,7 @@
       "driver": "pg",
       "host": "localhost",
       "database": "store_test",
-      "user": "postgres",
+      "user": "a13r1",
       "password": "mcgyver20#F"
     }
 }

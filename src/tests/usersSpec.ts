@@ -1,9 +1,11 @@
 import Users from '../models/users';
 import User from '../models/types/user';
+import supertest from 'supertest';
+import app from '../server';
 
 const users = new Users();
 
-describe('Users Endpoints', () => {
+describe('Users Table Actions', () => {
     it('should have an index method', () => {
         expect(users.index).toBeDefined();
     });
@@ -39,5 +41,49 @@ describe('Users Endpoints', () => {
     it('should return a user from show method', async () => {
         const user = await users.show('1');
         expect(user.id).toEqual(1);
+    });
+});
+
+describe('Users Endpoints', function () {
+    it('should respond with status 401 (unauthorized) using GET /users', (done) => {
+        supertest(app)
+            .get('/users')
+            .set('Accept', 'application/json')
+            .expect(401)
+            .end(function (err, _res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
+    });
+
+    it('should respond with status 401 (unauthorized) using GET /users/:id', (done) => {
+        supertest(app)
+            .get('/users/1')
+            .set('Accept', 'application/json')
+            .expect(401)
+            .end(function (err, res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
+    });
+
+    it('should respond with status 400 (bad request) using POST /users', (done) => {
+        supertest(app)
+            .post('/users')
+            .set('Accept', 'application/json')
+            .expect(400)
+            .end(function (err, res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
     });
 });

@@ -1,9 +1,11 @@
 import Products from '../models/products';
 import Product from '../models/types/product';
+import supertest from 'supertest';
+import app from '../server';
 
 const products = new Products();
 
-describe('Products Endpoints', () => {
+describe('Products Table Actions', () => {
     it('should have an index method', () => {
         expect(products.index).toBeDefined();
     });
@@ -35,5 +37,49 @@ describe('Products Endpoints', () => {
     it('should return a product from show method', async () => {
         const product = await products.show('1');
         expect(product).toEqual({ id: 1, name: 'product1', price: 2.5 });
+    });
+});
+
+describe('Products Endpoints', function () {
+    it('should respond with status 200 (ok) using GET /products', (done) => {
+        supertest(app)
+            .get('/products')
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end(function (err, _res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
+    });
+
+    it('should respond with status 200 (ok) using GET /products/:id', (done) => {
+        supertest(app)
+            .get('/products/1')
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end(function (err, res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
+    });
+
+    it('should respond with status 401 (unauthorized) using POST /products', (done) => {
+        supertest(app)
+            .post('/products')
+            .set('Accept', 'application/json')
+            .expect(401)
+            .end(function (err, res) {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
     });
 });
