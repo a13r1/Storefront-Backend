@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-import { Users } from '../models/users';
-import { User } from '../models/types/user';
+import Users from '../models/users';
+import User from '../models/types/user';
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../database';
 import authenticate from '../middleware/authentication';

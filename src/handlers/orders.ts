@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Orders } from '../models/orders';
+import Orders from '../models/orders';
 import authenticate from '../middleware/authentication';
 
 const orders = new Orders();

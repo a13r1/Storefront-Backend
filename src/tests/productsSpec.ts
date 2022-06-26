@@ -1,4 +1,4 @@
-import { Products } from '../products';
+import Products from '../models/products';
 
 const products = new Products();
 

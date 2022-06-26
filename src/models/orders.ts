@@ -1,7 +1,7 @@
 import { client } from '../database';
-import { Order } from './types/order';
+import Order from './types/order';
 
-export class Orders {
+class Orders {
     async show(id: string): Promise<Order[]> {
         try {
             const sql =
@@ -17,3 +17,5 @@ export class Orders {
         }
     }
 }
+
+export default Orders;

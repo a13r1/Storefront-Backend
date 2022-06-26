@@ -1,7 +1,7 @@
 import { client } from '../database';
-import { Product } from './types/product';
+import Product from './types/product';
 
-export class Products {
+class Products {
     async index(): Promise<Product[]> {
         try {
             const sql = 'select * from products;';
@@ -42,3 +42,5 @@ export class Products {
         }
     }
 }
+
+export default Products;

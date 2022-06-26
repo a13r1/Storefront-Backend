@@ -1,8 +1,8 @@
 import { client, BCRYPT_PASSWORD, SALT_ROUNDS } from '../database';
-import { User } from './types/user';
+import User from './types/user';
 import bcrypt from 'bcrypt';
 
-export class Users {
+class Users {
     async index(): Promise<User[]> {
         try {
             const sql = 'select * from users;';
@@ -50,3 +50,5 @@ export class Users {
         }
     }
 }
+
+export default Users;

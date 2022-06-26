@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-import { Products } from '../models/products';
-import { Product } from '../models/types/product';
+import Products from '../models/products';
+import Product from '../models/types/product';
 import authenticate from '../middleware/authentication';
 
 const products = new Products();
